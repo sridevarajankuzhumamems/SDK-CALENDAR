@@ -186,7 +186,7 @@ const MonthCalendar = () => {
                                 ◀
                             </button>
                             <div className="flex flex-col items-center">
-                                <span className="text-white font-bold text-lg tracking-widest uppercase">Panchangam</span>
+                                <span className="text-white font-bold text-lg tracking-widest uppercase">Sri Deverajan Kuzhumam</span>
                                 <div className="flex gap-1">
                                     {tamilMonths.map((tm, idx) => (
                                         <span key={idx} className="text-[10px] text-white/90 font-medium">
@@ -329,55 +329,55 @@ const MonthCalendar = () => {
                                     </div>
                                 )}
 
-                                {/* 3-Column Grid for Details */}
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                                {/* 3-Column Grid for Details (REVERSED: Horizontal on mobile, Stacked on desktop) */}
+                                <div className="grid grid-cols-3 md:grid-cols-1 gap-2 md:gap-6 items-center">
 
-                                    {/* Left Column: Thithi & Nakshatra */}
-                                    <div className="grid grid-cols-2 md:grid-cols-1 gap-2 md:space-y-3 order-2 md:order-1">
-                                        <div className="bg-purple-50 p-3 rounded-xl border border-purple-100 shadow-sm flex flex-col items-center md:items-start text-center md:text-left">
-                                            <p className="text-[10px] uppercase tracking-wider text-purple-600 font-bold mb-1">திதி (Thithi)</p>
-                                            <p className="text-xs md:text-sm font-bold text-purple-900 leading-tight">{selectedDate.panchangam.tithi}</p>
+                                    {/* Column/Row: Thithi & Nakshatra */}
+                                    <div className="flex flex-col gap-1.5 md:gap-3 order-1 md:order-2">
+                                        <div className="bg-purple-50 p-2 md:p-4 rounded-xl border border-purple-100 shadow-sm flex flex-col items-center md:items-start text-center md:text-left">
+                                            <p className="text-[8px] md:text-[10px] uppercase tracking-wider text-purple-600 font-bold mb-0.5 md:mb-1">திதி (Thithi)</p>
+                                            <p className="text-[10px] md:text-base font-bold text-purple-900 leading-tight">{selectedDate.panchangam.tithi}</p>
                                         </div>
-                                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-100 shadow-sm flex flex-col items-center md:items-start text-center md:text-left">
-                                            <p className="text-[10px] uppercase tracking-wider text-blue-600 font-bold mb-1">நட்சத்திரம் (Nakshatram)</p>
-                                            <p className="text-xs md:text-sm font-bold text-blue-900 leading-tight">{selectedDate.panchangam.nakshatra}</p>
+                                        <div className="bg-blue-50 p-2 md:p-4 rounded-xl border border-blue-100 shadow-sm flex flex-col items-center md:items-start text-center md:text-left">
+                                            <p className="text-[8px] md:text-[10px] uppercase tracking-wider text-blue-600 font-bold mb-0.5 md:mb-1">நட்சத்திரம் (Nakshatra)</p>
+                                            <p className="text-[10px] md:text-base font-bold text-blue-900 leading-tight">{selectedDate.panchangam.nakshatra}</p>
                                         </div>
                                     </div>
 
-                                    {/* Center Column: Event Image */}
-                                    <div className="order-1 md:order-2 flex justify-center">
+                                    {/* Column/Row: Event Image */}
+                                    <div className="order-2 md:order-1 flex justify-center">
                                         {selectedDate.panchangam.image ? (
-                                            <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-white ring-1 ring-gray-100 transform transition hover:scale-105 duration-300">
+                                            <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 md:border-4 border-white ring-1 ring-gray-100 transform transition hover:scale-105 duration-300">
                                                 <img
                                                     src={selectedDate.panchangam.image}
                                                     alt="Event"
-                                                    style={{ height: '250px', width: '150px', objectFit: 'cover' }}
+                                                    className="w-[100px] h-[150px] md:w-[200px] md:h-[300px] object-cover"
                                                 />
                                             </div>
                                         ) : (
-                                            <div className="w-full h-full min-h-[100px] flex items-center justify-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                                                <span className="text-gray-400 text-xs italic text-center px-4">தகவல் ஏதுமில்லை <br /> (No Image Available)</span>
+                                            <div className="w-full h-full min-h-[80px] md:min-h-[150px] flex items-center justify-center bg-gray-50 rounded-xl border-1 md:border-2 border-dashed border-gray-200">
+                                                <span className="text-[8px] md:text-xs text-gray-400 italic text-center px-1">படம் இல்லை <br /> (No Image)</span>
                                             </div>
                                         )}
                                     </div>
 
-                                    {/* Right Column: Timings */}
-                                    <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm order-3">
-                                        <p className="text-[10px] uppercase tracking-wider text-gray-500 font-bold mb-3 border-b pb-1 flex items-center gap-1">
-                                            <span role="img" aria-label="clock">⏰</span> கால நேரங்கள் (Timings)
+                                    {/* Column/Row: Timings */}
+                                    <div className="bg-gray-50 p-2 md:p-5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm order-3">
+                                        <p className="text-[8px] md:text-[10px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 md:mb-4 border-b pb-0.5 md:pb-2 flex items-center justify-center md:justify-start gap-1">
+                                            ⏰ நேரங்கள்
                                         </p>
-                                        <div className="space-y-3">
-                                            <div className="flex flex-col justify-between items-center py-1 border-b border-red-50">
-                                                <span className="text-[13px] font-semibold text-red-700">ராகு காலம்</span>
-                                                <span className="text-[10px] font-bold text-red-600 bg-red-100/50 px-2 py-0.5 rounded-full">{selectedDate.rahukalam.rahukalam}</span>
+                                        <div className="space-y-1.5 md:space-y-4">
+                                            <div className="flex flex-col md:flex-row md:justify-between items-center py-0.5 md:py-1.5 border-b border-red-50">
+                                                <span className="text-[9px] md:text-[12px] font-semibold text-red-700">ராகு</span>
+                                                <span className="text-[9px] md:text-sm font-bold text-red-600 px-1 md:px-3 py-0.5 rounded-full">{selectedDate.rahukalam.rahukalam}</span>
                                             </div>
-                                            <div className="flex flex-col justify-between items-center py-1 border-b border-orange-50">
-                                                <span className="text-[11px] font-semibold text-orange-700">யமகண்டம்</span>
-                                                <span className="text-[10px] font-bold text-orange-600 bg-orange-100/50 px-2 py-0.5 rounded-full">{selectedDate.rahukalam.yamagandam}</span>
+                                            <div className="flex flex-col md:flex-row md:justify-between items-center py-0.5 md:py-1.5 border-b border-orange-50">
+                                                <span className="text-[9px] md:text-[12px] font-semibold text-orange-700">யம</span>
+                                                <span className="text-[9px] md:text-sm font-bold text-orange-600 px-1 md:px-3 py-0.5 rounded-full">{selectedDate.rahukalam.yamagandam}</span>
                                             </div>
-                                            <div className="flex flex-col justify-between items-center py-1">
-                                                <span className="text-[11px] font-semibold text-yellow-700">குளிகை</span>
-                                                <span className="text-[10px] font-bold text-yellow-600 bg-yellow-100/50 px-2 py-0.5 rounded-full">{selectedDate.rahukalam.kuligai}</span>
+                                            <div className="flex flex-col md:flex-row md:justify-between items-center py-0.5 md:py-1.5">
+                                                <span className="text-[9px] md:text-[12px] font-semibold text-yellow-700">குளிகை</span>
+                                                <span className="text-[9px] md:text-sm font-bold text-yellow-600 px-1 md:px-3 py-0.5 rounded-full">{selectedDate.rahukalam.kuligai}</span>
                                             </div>
                                         </div>
                                     </div>
