@@ -51,9 +51,9 @@ import aadi4 from './assests/aadi4.jpg'
 import aadi5 from './assests/aadi5.jpg'
 import aadi6 from './assests/aadi6.jpg'
 import aadi7 from './assests/aadi7.jpg'
-import aadi8 from './assests/aadi8.jpg'
-// import aadi9 from './assests/aadi9.jpg'
-// import aadi10 from './assests/aadi10.jpg'
+import aadi8 from './assests/aadi8.jpeg'
+import aadi9 from './assests/aadi9.jpeg'
+import aadi10 from './assests/aadi10.jpg'
 
 import vijaya_dhasami from './assests/Vijayadhasami.jpg'
 
@@ -761,7 +761,6 @@ function assignSpecialImages() {
             if (PANCHANGAM_2026[m] && PANCHANGAM_2026[m][d]) {
                 const dayData = PANCHANGAM_2026[m][d];
                 dayData.image = vaganamImages[i];
-                console.log(dayData.image)
                 if (!dayData.events.includes(vaganamNames[i])) {
                     dayData.events.push(vaganamNames[i]);
                     dayData.festival = dayData.events.length > 0 ? dayData.events.join(", ") : null;
@@ -817,7 +816,7 @@ function assignSpecialImages() {
         const pmkImages = [pmk_day_1, pmk_day_2, pmk_day_3, pmk_day_4, pmk_day_5, pmk_day_6, pmk_day_7, pmk_day_8, pmk_day_9, pmk_day_10];
         for (let i = 0; i < 10; i++) {
             // Sequence starts 4 days before Pournami
-            const targetDate = new Date(2026, chithiraiPournami.month, chithiraiPournami.day - 4 + i);
+            const targetDate = new Date(2026, chithiraiPournami.month, chithiraiPournami.day - 5 + i);
             const m = targetDate.getMonth();
             const d = targetDate.getDate();
 
@@ -843,8 +842,8 @@ function assignSpecialImages() {
     });
 
     if (aadiPournami) {
-        const aadiImages = [aadi1, aadi2, aadi3, aadi4, aadi5, aadi6, aadi7, aadi8];
-        for (let i = 0; i < 8; i++) {
+        const aadiImages = [aadi1, aadi2, aadi3, aadi4, aadi5, aadi6, aadi7, aadi8, aadi9, aadi10];
+        for (let i = 0; i < 10; i++) {
             // Sequence starts 7 days before Pournami (Pournami is day 8)
             const targetDate = new Date(2026, aadiPournami.month, aadiPournami.day - 7 + i);
             const m = targetDate.getMonth();
