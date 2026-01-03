@@ -15,4 +15,41 @@
     background-color: #0c0600;
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* Image Protection - Prevent downloading */
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+  }
+
+  /* Re-enable pointer events for interactive elements containing images */
+  button img,
+  a img {
+    pointer-events: auto;
+  }
+}
+
+/* Protected image container - adds invisible overlay */
+.protected-image {
+  position: relative;
+  display: inline-block;
+}
+
+.protected-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  pointer-events: auto;
 }

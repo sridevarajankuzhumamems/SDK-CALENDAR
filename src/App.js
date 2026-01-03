@@ -32,6 +32,32 @@ function App() {
     setStep('calendar');
   };
 
+  // Prevent right-click on images
+  useEffect(() => {
+    const preventContextMenu = (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    const preventDrag = (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    document.addEventListener('contextmenu', preventContextMenu);
+    document.addEventListener('dragstart', preventDrag);
+
+    return () => {
+      document.removeEventListener('contextmenu', preventContextMenu);
+      document.removeEventListener('dragstart', preventDrag);
+    };
+  }, []);
+
+
   if (step === 'loading') {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden bg-[#0c0600]">
