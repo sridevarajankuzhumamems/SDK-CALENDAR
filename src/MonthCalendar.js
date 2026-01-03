@@ -12,7 +12,7 @@ const mayImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_23_Garuda_Vaganam.j
 const juneImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_24_Anumantha_Vaganam.jpg';
 const julyImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_25_Yanai_Vaganam.jpg';
 const augustImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_26_Thirukallayanam(2).jpg';
-const septemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_27_Vennaithali(1).jpg';
+const septemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May-27?updatedAt=1767456631432';
 const octoberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_28_Kudurai_Mrg.jpg';
 const novemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_29_Therthavaari.jpg';
 const decemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/Dec_Month.jpg';
@@ -43,7 +43,7 @@ const MonthCalendar = () => {
     const [currentYear, setCurrentYear] = useState(2026);
     const [currentMonth, setCurrentMonth] = useState(0); // Start with January
     const [selectedDate, setSelectedDate] = useState(null);
-    const [touchStart, setTouchStart] = useState(null);
+    // const [touchStart, setTouchStart] = useState(null);
 
     const monthName = MONTH_NAMES[currentMonth];
 
@@ -73,22 +73,16 @@ const MonthCalendar = () => {
         return getTamilMonthsInGregorianMonth(currentYear, currentMonth);
     }, [currentYear, currentMonth]);
 
-    // Navigation handlers
+    // Navigation handlers - restricted to 2026 only
     const goToPreviousMonth = () => {
-        if (currentMonth === 0) {
-            setCurrentMonth(11);
-            setCurrentYear(currentYear - 1);
-        } else {
+        if (currentMonth > 0) {
             setCurrentMonth(currentMonth - 1);
         }
         setSelectedDate(null);
     };
 
     const goToNextMonth = () => {
-        if (currentMonth === 11) {
-            setCurrentMonth(0);
-            setCurrentYear(currentYear + 1);
-        } else {
+        if (currentMonth < 11) {
             setCurrentMonth(currentMonth + 1);
         }
         setSelectedDate(null);
@@ -98,29 +92,7 @@ const MonthCalendar = () => {
         setSelectedDate(dayData);
     };
 
-    // Touch swipe handlers for mobile navigation
-    const handleTouchStart = (e) => {
-        setTouchStart(e.touches[0].clientX);
-    };
-
-    const handleTouchEnd = (e) => {
-        if (!touchStart) return;
-
-        const touchEnd = e.changedTouches[0].clientX;
-        const diff = touchStart - touchEnd;
-        const minSwipeDistance = 50;
-
-        if (Math.abs(diff) > minSwipeDistance) {
-            if (diff > 0) {
-                // Swipe left (right to left) - go to next month
-                goToNextMonth();
-            } else {
-                // Swipe right (left to right) - go to previous month
-                goToPreviousMonth();
-            }
-        }
-        setTouchStart(null);
-    };
+    // Swipe navigation removed
 
     // Get background color based on day type
     const getDayBackground = (dayType, isSelected) => {
@@ -139,8 +111,6 @@ const MonthCalendar = () => {
         <div className="min-h-screen bg-gradient-to-b from-green-200 to-green-300 flex items-center justify-center p-2 sm:p-4">
             <div
                 className="w-full cont max-w-full md:max-w-6xl bg-[#8fbc8f] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
             >
 
                 {/* Header with decorative leaves */}
@@ -161,11 +131,11 @@ const MonthCalendar = () => {
                     {/* Left Column: Month Image (Desktop) / Top Section (Mobile) */}
                     <div className="md:w-5/12 lg:w-4/12 flex items-start justify-center">
                         {MONTH_IMAGES[currentMonth] && (
-                            <div className="w-full h-full max-w-[400px] md:max-w-none rounded-2xl overflow-hidden shadow-2xl border-8 border-white/20 transform transition hover:scale-[1.02] duration-500">
+                            <div className="w-full h-full max-w-[300px] md:max-w-none rounded-2xl overflow-hidden shadow-2xl border-8 border-white/20 transform transition hover:scale-[1.02] duration-500">
                                 <img
                                     src={MONTH_IMAGES[currentMonth]}
                                     alt={`${monthName} decoration`}
-                                    className="w-full object-cover h-[400px] md:h-[700px]"
+                                    className="w-full object-cover h-[300px] md:h-[500px]"
                                     style={{
                                         objectPosition: 'top',
                                         borderRadius: '12px'
@@ -178,16 +148,17 @@ const MonthCalendar = () => {
                     {/* Right Column: Navigation and Calendar Grid */}
                     <div className="md:w-7/12 lg:w-8/12 flex flex-col">
 
-                        {/* Navigation Arrows */}
-                        <div className="flex justify-between items-center mb-6 bg-white/20 p-2 rounded-2xl shadow-inner border border-white/10">
+                        {/* Navigation Arrows - Smaller */}
+                        <div className="flex justify-between items-center mb-4 bg-white/20 p-2 rounded-xl shadow-inner border border-white/10">
                             <button
                                 onClick={goToPreviousMonth}
-                                className="w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 text-2xl font-bold text-green-700 hover:scale-110 active:scale-95"
+                                disabled={currentMonth === 0}
+                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-green-700 hover:scale-110 active:scale-95'}`}
                             >
                                 ◀
                             </button>
                             <div className="flex flex-col items-center">
-                                <span className="text-white font-bold text-lg tracking-widest uppercase">{monthName.toUpperCase()} - {currentYear}</span>
+                                <span className="text-white font-bold text-sm sm:text-base tracking-widest uppercase">{monthName.toUpperCase()} - {currentYear}</span>
                                 <div className="flex gap-1">
                                     {tamilMonths.map((tm, idx) => (
                                         <span key={idx} className="text-[10px] text-white/90 font-medium">
@@ -198,11 +169,13 @@ const MonthCalendar = () => {
                             </div>
                             <button
                                 onClick={goToNextMonth}
-                                className="w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 text-2xl font-bold text-green-700 hover:scale-110 active:scale-95"
+                                disabled={currentMonth === 11}
+                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 11 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-green-700 hover:scale-110 active:scale-95'}`}
                             >
                                 ▶
                             </button>
                         </div>
+
 
                         {/* Calendar Grid Container */}
                         <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 transition-all duration-300">
@@ -261,10 +234,7 @@ const MonthCalendar = () => {
                                                 </span>
                                             )}
 
-                                            {/* Event indicator with first event name */}
-                                            {panchangam.events && panchangam.events.length > 0 && !panchangam.isGovtHoliday && !panchangam.image && (
-                                                <span className="absolute top-0.5 right-0.5 text-[10px]">🎉</span>
-                                            )}
+                                            {/* Event indicator removed */}
 
                                             {/* Small event image in cell */}
                                             {panchangam.image && (
@@ -319,7 +289,7 @@ const MonthCalendar = () => {
                                 {/* Events - Full Width Top */}
                                 {selectedDate.panchangam.events && selectedDate.panchangam.events.length > 0 && (
                                     <div className="bg-red-50 p-3 rounded-lg mb-4">
-                                        <p className="text-xs text-red-600 font-medium mb-2">🎉 நிகழ்வுகள் (Events)</p>
+                                        <p className="text-xs text-red-600 font-medium mb-2">நிகழ்வுகள் (Events)</p>
                                         <div className="flex flex-wrap gap-1">
                                             {selectedDate.panchangam.events.map((event, idx) => (
                                                 <span key={idx} className="px-2 py-1 bg-red-100 text-red-700 text-sm font-bold rounded">

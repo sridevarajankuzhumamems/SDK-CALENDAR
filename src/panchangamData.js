@@ -17,7 +17,7 @@ const day5 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_24_Anumantha_Vaganam.
 const day6 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_25_Yanai_Vaganam.jpg';
 const day7 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_26_Thirukallayanam(2).jpg';
 const day8 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_27_Vennaithali(1).jpg';
-const day9 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_28_Kudurai_Mrg.jpg';
+const day9 = 'https://ik.imagekit.io/hskzc0fkv/assests/WhatsApp%20Image%202026-01-03%20at%2015.17.53.jpeg';
 const day10 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_29_Therthavaari.jpg';
 const day11 = 'https://ik.imagekit.io/hskzc0fkv/assests/IMG-20250611-WA0085.jpg';
 const day12 = 'https://ik.imagekit.io/hskzc0fkv/1000242482.jpg';
@@ -59,7 +59,7 @@ const aadi10 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi10.jpg';
 const vijaya_dhasami = 'https://ik.imagekit.io/hskzc0fkv/assests/Vijayadhasami.jpg';
 
 const mandala_poojai = 'https://ik.imagekit.io/hskzc0fkv/assests/mandala%20abhisegam.jpg';
-const srivari_bajanai = 'https://ik.imagekit.io/hskzc0fkv/assests/mandala%20abhisegam.jpg'
+const srivari_bajanai = 'https://ik.imagekit.io/hskzc0fkv/assests/Srivari%20bhajanai.jpg'
 
 // Day types for color highlighting
 export const DAY_TYPES = {
