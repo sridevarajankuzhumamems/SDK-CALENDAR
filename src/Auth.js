@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
 const Auth = ({ onAuthSuccess }) => {
-    const [isSignup, setIsSignup] = useState(true);
     const [formData, setFormData] = useState({
-        phoneNumber: '',
+        name: '',
         email: '',
-        password: ''
+        phone: ''
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -24,38 +23,32 @@ const Auth = ({ onAuthSuccess }) => {
         setError('');
 
         try {
-            // Use different endpoints for signup vs login
-            const endpoint = isSignup
-                ? 'https://sdk-calendar-be.onrender.com/api/auth/signup'
-                : 'https://sdk-calendar-be.onrender.com/api/auth/login';
-
-            // Prepare payload based on mode
-            const payload = isSignup
-                ? formData // All fields for signup
-                : { phoneNumber: formData.phoneNumber, password: formData.password }; // Only phone & password for login
-
-            const response = await fetch(endpoint, {
+            const response = await fetch('https://sdk-calendar-be-1.onrender.com/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(formData)
             });
 
             const data = await response.json();
 
             if (data.success) {
                 // Store token in localStorage
-                localStorage.setItem('calendar_auth_token', data.data.token);
-                localStorage.setItem('calendar_user', JSON.stringify(data.data.user));
+                localStorage.setItem('calendar_auth_token', data.token);
+                localStorage.setItem('calendar_user', JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone
+                }));
 
                 // Call success callback
-                onAuthSuccess(data.data.token);
+                onAuthSuccess(data.token);
             } else {
-                setError(data.message || 'Authentication failed');
+                setError(data.message || 'Registration failed');
             }
         } catch (err) {
-            setError('Network error. Please check if the server is running.');
+            setError('Network error. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -69,72 +62,68 @@ const Auth = ({ onAuthSuccess }) => {
                 <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FFD700]/8 blur-[120px] animate-pulse-delayed"></div>
             </div>
 
-            {/* Auth Form Container */}
+            {/* Registration Form Container */}
             <div className="relative z-10 w-full max-w-md mx-4 animate-in fade-in zoom-in-95 duration-1000">
                 {/* Glassmorphic Card */}
                 <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] p-8">
 
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold text-[#FFD700] mb-2 tracking-wide">
-                            {isSignup ? 'Welcome' : 'Welcome Back'}
+                        <h2 className="text-2xl font-bold text-[#FFD700] mb-2 tracking-wide">
+                            Welcome
                         </h2>
                         <p className="text-white/60 text-sm">
-                            {isSignup ? 'Create your account to continue' : 'Sign in to access your calendar'}
+                            Enter your details to continue
                         </p>
                     </div>
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* Phone Number - Show for both signup and login */}
-                        {(isSignup || !isSignup) && (
-                            <div>
-                                <label className="block text-white/70 text-sm mb-2 font-medium">
-                                    Phone Number
-                                </label>
-                                <input
-                                    type="tel"
-                                    name="phoneNumber"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[#FFD700]/50 focus:bg-white/10 transition-all"
-                                    placeholder="Enter your phone number"
-                                />
-                            </div>
-                        )}
-
-                        {/* Email - Only show for signup */}
-                        {isSignup && (
-                            <div>
-                                <label className="block text-white/70 text-sm mb-2 font-medium">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required={isSignup}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[#FFD700]/50 focus:bg-white/10 transition-all"
-                                    placeholder="Enter your email"
-                                />
-                            </div>
-                        )}
-
-                        {/* Password */}
+                        {/* Name */}
                         <div>
                             <label className="block text-white/70 text-sm mb-2 font-medium">
-                                Password
+                                Name
                             </label>
                             <input
-                                type="password"
-                                name="password"
-                                value={formData.password}
+                                type="text"
+                                name="name"
+                                value={formData.name}
                                 onChange={handleChange}
                                 required
                                 className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[#FFD700]/50 focus:bg-white/10 transition-all"
-                                placeholder="Enter your password"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+
+                        {/* Email */}
+                        <div>
+                            <label className="block text-white/70 text-sm mb-2 font-medium">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[#FFD700]/50 focus:bg-white/10 transition-all"
+                                placeholder="Enter your email"
+                            />
+                        </div>
+
+                        {/* Phone */}
+                        <div>
+                            <label className="block text-white/70 text-sm mb-2 font-medium">
+                                Phone Number
+                            </label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[#FFD700]/50 focus:bg-white/10 transition-all"
+                                placeholder="Enter your phone number"
                             />
                         </div>
 
@@ -151,23 +140,9 @@ const Auth = ({ onAuthSuccess }) => {
                             disabled={loading}
                             className="w-full py-3 bg-gradient-to-r from-[#FF9933] to-[#FFD700] text-[#0c0600] font-bold rounded-xl hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {loading ? 'Processing...' : (isSignup ? 'Create Account' : 'Sign In')}
+                            {loading ? 'Processing...' : 'Continue'}
                         </button>
                     </form>
-
-                    {/* Toggle Login/Signup */}
-                    <div className="mt-6 text-center">
-                        <button
-                            onClick={() => {
-                                setIsSignup(!isSignup);
-                                setError('');
-                                setFormData({ phoneNumber: '', email: '', password: '' });
-                            }}
-                            className="text-[#FFD700]/70 hover:text-[#FFD700] text-sm transition-colors"
-                        >
-                            {isSignup ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
-                        </button>
-                    </div>
                 </div>
 
                 {/* Decorative Line */}
