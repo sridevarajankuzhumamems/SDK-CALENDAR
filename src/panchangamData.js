@@ -28,6 +28,7 @@ const day16 = 'https://ik.imagekit.io/hskzc0fkv/assests/Dec_Month.jpg';
 const masimagam = 'https://ik.imagekit.io/hskzc0fkv/assests/Aani_Kettai(S)_Sestaabhisegam.jpg';
 const ramanavami = 'https://ik.imagekit.io/hskzc0fkv/assests/Panguni_Navami(RamaNavami).jpg';
 const panguni_thirukalyanam = 'https://ik.imagekit.io/hskzc0fkv/assests/Panguni_Uthiram(S)_Thirukalyanan.jpg';
+const panguni_uthiram = 'https://ik.imagekit.io/hskzc0fkv/assests/_1010332.jpg'
 const panguni_dhani = 'https://ik.imagekit.io/hskzc0fkv/assests/Panguni_Uthiram_D5.jpg';
 const tamilnewyear = 'https://ik.imagekit.io/hskzc0fkv/assests/Tamil_New_Year.jpg';
 const gajendra_motcham = 'https://ik.imagekit.io/hskzc0fkv/assests/Gajendra%20Mokcham.jpg';
@@ -676,9 +677,10 @@ function assignSpecialImages() {
                 data.image = gajendra_motcham;
             }
 
-            // Panguni Uthiram Image Assignment
+            // Panguni Uthiram Image Assignment - use both images
             if (data.tamil_date.startsWith("பங்குனி") && data.nakshatra === "உத்திரம்") {
-                data.image = panguni_thirukalyanam;
+                data.image = panguni_uthiram; // Primary image
+                data.secondaryImage = panguni_thirukalyanam; // Secondary image
                 if (data.events && !data.events.includes("பங்குனி உத்திரம்")) {
                     data.events.push("பங்குனி உத்திரம்");
                     data.festival = data.events.join(", ");

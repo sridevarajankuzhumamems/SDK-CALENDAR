@@ -43,6 +43,7 @@ const MonthCalendar = () => {
     const [currentYear, setCurrentYear] = useState(2026);
     const [currentMonth, setCurrentMonth] = useState(0); // Start with January
     const [selectedDate, setSelectedDate] = useState(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0); // For image carousel
     // const [touchStart, setTouchStart] = useState(null);
 
     const monthName = MONTH_NAMES[currentMonth];
@@ -93,6 +94,18 @@ const MonthCalendar = () => {
     };
 
     // Swipe navigation removed
+
+    // Auto-slide for images when modal is open and has secondary image
+    React.useEffect(() => {
+        if (selectedDate?.panchangam?.secondaryImage) {
+            const timer = setInterval(() => {
+                setCurrentImageIndex(prev => prev === 0 ? 1 : 0);
+            }, 2000);
+            return () => clearInterval(timer);
+        } else {
+            setCurrentImageIndex(0);
+        }
+    }, [selectedDate]);
 
     // Get background color based on day type
     const getDayBackground = (dayType, isSelected) => {
@@ -322,16 +335,25 @@ const MonthCalendar = () => {
                                         </div>
                                     </div>
 
-                                    {/* Column/Row: Event Image */}
-                                    <div className="order-2 md:order-1 flex justify-center">
+                                    {/* Column/Row: Event Image(s) - Auto-slide carousel */}
+                                    <div className="order-2 md:order-1 flex flex-col items-center gap-2">
                                         {selectedDate.panchangam.image ? (
-                                            <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 md:border-4 border-white ring-1 ring-gray-100 transform transition hover:scale-105 duration-300">
-                                                <img
-                                                    src={selectedDate.panchangam.image}
-                                                    alt="Event"
-                                                    className="w-[120px] h-[180px] md:w-[200px] md:h-[300px] object-contain"
-                                                />
-                                            </div>
+                                            <>
+                                                <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 md:border-4 border-white ring-1 ring-gray-100">
+                                                    <img
+                                                        src={currentImageIndex === 0 ? selectedDate.panchangam.image : (selectedDate.panchangam.secondaryImage || selectedDate.panchangam.image)}
+                                                        alt="Event"
+                                                        className="w-[120px] h-[180px] md:w-[200px] md:h-[300px] object-contain transition-opacity duration-500"
+                                                    />
+                                                </div>
+                                                {/* Slide indicator dots */}
+                                                {selectedDate.panchangam.secondaryImage && (
+                                                    <div className="flex gap-1.5">
+                                                        <span className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === 0 ? 'bg-green-600 scale-110' : 'bg-gray-300'}`}></span>
+                                                        <span className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === 1 ? 'bg-green-600 scale-110' : 'bg-gray-300'}`}></span>
+                                                    </div>
+                                                )}
+                                            </>
                                         ) : (
                                             <div className="w-full h-full min-h-[80px] md:min-h-[150px] flex items-center justify-center bg-gray-50 rounded-xl border-1 md:border-2 border-dashed border-gray-200">
                                                 <span className="text-[8px] md:text-xs text-gray-400 italic text-center px-1">படம் இல்லை <br /> (No Image)</span>
