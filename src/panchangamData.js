@@ -6,7 +6,7 @@ const andal_malai = 'https://ik.imagekit.io/hskzc0fkv/assests/andal_malai_matram
 const radha_sapthami = 'https://ik.imagekit.io/hskzc0fkv/assests/radha_sapthami.jpeg';
 const vidai_atru = 'https://ik.imagekit.io/hskzc0fkv/assests/thai-1.jpg';
 const punnim = 'https://ik.imagekit.io/hskzc0fkv/assests/Punnim.jpg';
-const unjal_sevai = 'https://ik.imagekit.io/hskzc0fkv/assests/Unthal_Seva.jpg';
+const unjal_sevai = 'https://ik.imagekit.io/hskzc0fkv/assests/Unjal_Sevai_Final.jpg';
 
 // Vaikasi Vaganam Images
 const day1 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_20_Annam_Vaganam.jpg';
@@ -60,7 +60,34 @@ const aadi10 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi10.jpg';
 const vijaya_dhasami = 'https://ik.imagekit.io/hskzc0fkv/assests/Vijayadhasami.jpg';
 
 const mandala_poojai = 'https://ik.imagekit.io/hskzc0fkv/assests/mandala%20abhisegam.jpg';
-const srivari_bajanai = 'https://ik.imagekit.io/hskzc0fkv/assests/Srivari%20bhajanai.jpg'
+const srivari_bajanai = 'https://ik.imagekit.io/hskzc0fkv/assests/Srivari%20bhajanai.jpg';
+
+const srinivasan = 'https://ik.imagekit.io/hskzc0fkv/assests/108_Srinivasan.jpg';
+const srinivasan_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Srinivasan_108.jpg';
+
+const thirumangai_alvar = 'https://ik.imagekit.io/hskzc0fkv/assests/Karthigai_Chitrai(S)_Thirumangai_Azlvar.jpg';
+const ramanujar_jeyanthi = 'https://ik.imagekit.io/hskzc0fkv/assests/Ramanujar_Jayanthi.jpg'
+
+
+//Pmk Eswaran kovil
+
+const pmk_eswaran_kovil_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-1Moring.jpg?updatedAt=1767541063935'
+const pmk_eswaran_kovil_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-2.2.jpg?updatedAt=1767541062545'
+const pmk_eswaran_kovil_3 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day3.1.jpg?updatedAt=1767541164053'
+const pmk_eswaran_kovil_3_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day3.2.jpg?updatedAt=1767541162696'
+const pmk_eswaran_kovil_4 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day4.1.jpg?updatedAt=1767541157029'
+const pmk_eswaran_kovil_4_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day4.2.jpg?updatedAt=1767541165313'
+const pmk_eswaran_kovil_5 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day5.2.jpg?updatedAt=1767541161003'
+const pmk_eswaran_kovil_5_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day5.1.jpg?updatedAt=1767541162481'
+const pmk_eswaran_kovil_6 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day6.2.jpg?updatedAt=1767541153079'
+const pmk_eswaran_kovil_6_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day6.1.jpg?updatedAt=1767541165013'
+const pmk_eswaran_kovil_7 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-7.2.jpg?updatedAt=1767541072485'
+const pmk_eswaran_kovil_7_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-7.1.jpg?updatedAt=1767541077984'
+const pmk_eswaran_kovil_7_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day7.3.jpg?updatedAt=1767541171452'
+const pmk_eswaran_kovil_8 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day8.0.jpg?updatedAt=1767541175533'
+const pmk_eswaran_kovil_9 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-9.jpg?updatedAt=1767541075756'
+const pmk_eswaran_kovil_10 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day10.1.jpg?updatedAt=1767541068105'
+const pmk_eswaran_kovil_10_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day10.2.jpg?updatedAt=1767541139815'
 
 // Day types for color highlighting
 export const DAY_TYPES = {
@@ -687,6 +714,51 @@ function assignSpecialImages() {
                 }
             }
 
+            // Aavani Avittam - Find the date and assign image to next Wednesday
+            if (data.tamil_date.startsWith("ஆவணி") && data.nakshatra === "அவிட்டம்") {
+                // Calculate the next Wednesday after this date
+                const avittamDate = new Date(2026, parseInt(month), parseInt(day));
+                const avittamDayOfWeek = avittamDate.getDay();
+                // 3 = Wednesday, find days until next Wednesday
+                const daysUntilWednesday = avittamDayOfWeek <= 3 ? (3 - avittamDayOfWeek) : (10 - avittamDayOfWeek);
+
+                if (daysUntilWednesday > 0) {
+                    const nextWednesday = new Date(avittamDate);
+                    nextWednesday.setDate(avittamDate.getDate() + daysUntilWednesday);
+
+                    // Store for later assignment
+                    const wedMonth = nextWednesday.getMonth();
+                    const wedDay = nextWednesday.getDate();
+
+                    // Find and assign to the Wednesday date
+                    const wedMonthData = PANCHANGAM_2026[wedMonth];
+                    if (wedMonthData && wedMonthData[wedDay]) {
+                        wedMonthData[wedDay].gridImage = srinivasan; // For calendar grid thumbnail
+                        wedMonthData[wedDay].image = srinivasan_2; // For modal primary
+                        wedMonthData[wedDay].secondaryImage = srinivasan; // For modal carousel
+                        if (!wedMonthData[wedDay].events.includes("ஶ்ரீநிவாசன் 108")) {
+                            wedMonthData[wedDay].events.push("ஶ்ரீநிவாசன் 108");
+                        }
+                    }
+                }
+            }
+
+            // Thirumangai Alvar - Karthigai month with Karthigai nakshatra
+            if (data.tamil_date.startsWith("கார்த்திகை") && data.nakshatra === "கார்த்திகை") {
+                data.image = thirumangai_alvar;
+                if (data.events && !data.events.includes("திருமங்கை ஆழ்வார்")) {
+                    data.events.push("திருமங்கை ஆழ்வார்");
+                }
+            }
+
+            // Ramanujar Jayanthi - Chithirai month with Thiruvathirai nakshatra
+            if (data.tamil_date.startsWith("சித்திரை") && data.nakshatra === "திருவாதிரை") {
+                data.image = ramanujar_jeyanthi;
+                if (data.events && !data.events.includes("ராமானுஜர் ஜெயந்தி")) {
+                    data.events.push("ராமானுஜர் ஜெயந்தி");
+                }
+            }
+
             // Track Fridays by Tamil month for unjal_sevai
             const gregorianDay = parseInt(day);
             const date = new Date(2026, parseInt(month), gregorianDay);
@@ -826,6 +898,62 @@ function assignSpecialImages() {
             if (PANCHANGAM_2026[m] && PANCHANGAM_2026[m][d]) {
                 const dayData = PANCHANGAM_2026[m][d];
                 dayData.image = pmkImages[i];
+            }
+        }
+    }
+
+    // Eswaran Kovil 10-day sequence (April 21-30, 2026)
+    // Runs after Chithirai Pournami so it can detect existing images
+    let chithiraiChithirai = null;
+    Object.keys(PANCHANGAM_2026).forEach(month => {
+        const monthData = PANCHANGAM_2026[month];
+        Object.keys(monthData).forEach(day => {
+            const data = monthData[day];
+            if (data.tamil_date.startsWith("சித்திரை") && data.nakshatra === "சித்திரை") {
+                if (!chithiraiChithirai) {
+                    chithiraiChithirai = { month: parseInt(month), day: parseInt(day) };
+                }
+            }
+        });
+    });
+
+    if (chithiraiChithirai) {
+        // Each day with its images [primary, ...additional images for carousel]
+        const eswaranImagesPerDay = [
+            [pmk_eswaran_kovil_1], // Day 1
+            [pmk_eswaran_kovil_2], // Day 2
+            [pmk_eswaran_kovil_3, pmk_eswaran_kovil_3_1], // Day 3
+            [pmk_eswaran_kovil_4, pmk_eswaran_kovil_4_1], // Day 4
+            [pmk_eswaran_kovil_5, pmk_eswaran_kovil_5_1], // Day 5
+            [pmk_eswaran_kovil_6, pmk_eswaran_kovil_6_1], // Day 6
+            [pmk_eswaran_kovil_7, pmk_eswaran_kovil_7_1, pmk_eswaran_kovil_7_2], // Day 7
+            [pmk_eswaran_kovil_8], // Day 8
+            [pmk_eswaran_kovil_9], // Day 9
+            [pmk_eswaran_kovil_10, pmk_eswaran_kovil_10_1] // Day 10
+        ];
+
+        // Assign images for 10 days ending on Chithirai-Chithirai day (April 30)
+        for (let i = 0; i < 10; i++) {
+            const targetDate = new Date(2026, chithiraiChithirai.month, chithiraiChithirai.day - 9 + i);
+            const m = targetDate.getMonth();
+            const d = targetDate.getDate();
+
+            if (PANCHANGAM_2026[m] && PANCHANGAM_2026[m][d]) {
+                const dayData = PANCHANGAM_2026[m][d];
+                const dayImages = eswaranImagesPerDay[i];
+
+                if (dayData.image) {
+                    // Existing image on right, Eswaran Kovil on left
+                    dayData.leftImage = dayImages[0];
+                    // Store all Eswaran Kovil images for carousel
+                    dayData.imageArray = dayImages;
+                } else {
+                    dayData.image = dayImages[0];
+                    // Store additional images for carousel if more than 1
+                    if (dayImages.length > 1) {
+                        dayData.imageArray = dayImages;
+                    }
+                }
             }
         }
     }

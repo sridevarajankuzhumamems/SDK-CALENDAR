@@ -16,7 +16,7 @@ const septemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May-27?updatedAt=
 const octoberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_28_Kudurai_Mrg.jpg';
 const novemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/May_29_Therthavaari.jpg';
 const decemberImg = 'https://ik.imagekit.io/hskzc0fkv/assests/Dec_Month.jpg';
-const logo = 'https://ik.imagekit.io/hskzc0fkv/assests/sdk_logo.png';
+const logo = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png';
 
 const MONTH_NAMES = [
     "January", "February", "March", "April", "May", "June",
@@ -95,11 +95,13 @@ const MonthCalendar = () => {
 
     // Swipe navigation removed
 
-    // Auto-slide for images when modal is open and has secondary image
+    // Auto-slide for images when modal is open and has multiple images
     React.useEffect(() => {
-        if (selectedDate?.panchangam?.secondaryImage) {
+        const panchangam = selectedDate?.panchangam;
+        if (panchangam?.imageArray || panchangam?.secondaryImage) {
+            const imageCount = panchangam.imageArray ? panchangam.imageArray.length : 2;
             const timer = setInterval(() => {
-                setCurrentImageIndex(prev => prev === 0 ? 1 : 0);
+                setCurrentImageIndex(prev => (prev + 1) % imageCount);
             }, 2000);
             return () => clearInterval(timer);
         } else {
@@ -256,10 +258,20 @@ const MonthCalendar = () => {
 
                                             {/* Event indicator removed */}
 
-                                            {/* Small event image in cell */}
-                                            {panchangam.image && (
+
+                                            {/* Left image in cell (for dual image display) */}
+                                            {panchangam.leftImage && (
                                                 <img
-                                                    src={panchangam.image}
+                                                    src={panchangam.leftImage}
+                                                    alt="Event Left"
+                                                    className="absolute top-0 left-0 w-5 h-5 sm:w-8 sm:h-8 object-cover rounded-br"
+                                                />
+                                            )}
+
+                                            {/* Right image in cell */}
+                                            {(panchangam.gridImage || panchangam.image) && (
+                                                <img
+                                                    src={panchangam.gridImage || panchangam.image}
                                                     alt="Event"
                                                     className="absolute top-0 right-0 w-5 h-5 sm:w-8 sm:h-8 object-cover rounded-bl"
                                                 />
@@ -341,16 +353,24 @@ const MonthCalendar = () => {
                                             <>
                                                 <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 md:border-4 border-white ring-1 ring-gray-100">
                                                     <img
-                                                        src={currentImageIndex === 0 ? selectedDate.panchangam.image : (selectedDate.panchangam.secondaryImage || selectedDate.panchangam.image)}
+                                                        src={
+                                                            selectedDate.panchangam.imageArray
+                                                                ? selectedDate.panchangam.imageArray[currentImageIndex] || selectedDate.panchangam.image
+                                                                : (currentImageIndex === 0 ? selectedDate.panchangam.image : (selectedDate.panchangam.secondaryImage || selectedDate.panchangam.image))
+                                                        }
                                                         alt="Event"
                                                         className="w-[120px] h-[180px] md:w-[200px] md:h-[300px] object-contain transition-opacity duration-500"
                                                     />
                                                 </div>
                                                 {/* Slide indicator dots */}
-                                                {selectedDate.panchangam.secondaryImage && (
+                                                {(selectedDate.panchangam.imageArray || selectedDate.panchangam.secondaryImage) && (
                                                     <div className="flex gap-1.5">
-                                                        <span className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === 0 ? 'bg-green-600 scale-110' : 'bg-gray-300'}`}></span>
-                                                        <span className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === 1 ? 'bg-green-600 scale-110' : 'bg-gray-300'}`}></span>
+                                                        {(selectedDate.panchangam.imageArray || [selectedDate.panchangam.image, selectedDate.panchangam.secondaryImage]).map((_, idx) => (
+                                                            <span
+                                                                key={idx}
+                                                                className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === idx ? 'bg-green-600 scale-110' : 'bg-gray-300'}`}
+                                                            ></span>
+                                                        ))}
                                                     </div>
                                                 )}
                                             </>

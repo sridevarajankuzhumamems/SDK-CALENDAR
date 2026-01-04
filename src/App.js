@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
 import Auth from "./Auth";
 import { isAuthenticated } from "./utils/auth";
-const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/sdk_logo.png";
+const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png";
 const introImg = "https://ik.imagekit.io/hskzc0fkv/assests/IMG-20250611-WA0085.jpg";
 
 
@@ -108,11 +108,11 @@ function App() {
             </svg>
 
             {/* Logo Wrapper with Shimmer Glass Effect */}
-            <div className="relative z-10 w-36 h-36 sm:w-48 sm:h-48 bg-white/5 backdrop-blur-2xl rounded-full border border-white/10 flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 bg-white/5 backdrop-blur-2xl rounded-full border border-white/10 flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
               <img
                 src={sdkLogo}
                 alt="SDK Logo"
-                className="w-28 h-28 sm:w-36 sm:h-36 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(255,153,51,0.3)]"
+                className="w-64 h-64 sm:w-64 sm:h-64 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(255,153,51,0.3)]"
               />
               {/* Shimmer Light Beam Effect */}
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] animate-shimmer"></div>
