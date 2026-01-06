@@ -80,14 +80,27 @@ const pmk_eswaran_kovil_4_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day4.2.j
 const pmk_eswaran_kovil_5 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day5.2.jpg?updatedAt=1767541161003'
 const pmk_eswaran_kovil_5_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day5.1.jpg?updatedAt=1767541162481'
 const pmk_eswaran_kovil_6 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day6.2.jpg?updatedAt=1767541153079'
-const pmk_eswaran_kovil_6_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day6.1.jpg?updatedAt=1767541165013'
+// const pmk_eswaran_kovil_6_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day6.1.jpg?updatedAt=1767541165013'
 const pmk_eswaran_kovil_7 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-7.2.jpg?updatedAt=1767541072485'
-const pmk_eswaran_kovil_7_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-7.1.jpg?updatedAt=1767541077984'
-const pmk_eswaran_kovil_7_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day7.3.jpg?updatedAt=1767541171452'
+// const pmk_eswaran_kovil_7_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-7.1.jpg?updatedAt=1767541077984'
+// const pmk_eswaran_kovil_7_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day7.3.jpg?updatedAt=1767541171452'
 const pmk_eswaran_kovil_8 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day8.0.jpg?updatedAt=1767541175533'
 const pmk_eswaran_kovil_9 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day-9.jpg?updatedAt=1767541075756'
 const pmk_eswaran_kovil_10 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day10.1.jpg?updatedAt=1767541068105'
-const pmk_eswaran_kovil_10_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day10.2.jpg?updatedAt=1767541139815'
+// const pmk_eswaran_kovil_10_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Day10.2.jpg?updatedAt=1767541139815'
+
+
+const navarathri_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar_Srinivasan2.jpg'
+const navarathri_2 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(1).jpg'
+const navarathri_3 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(2).jpg'
+const navarathri_4 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar(3).jpg'
+const navarathri_5 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(4).jpg'
+const navarathri_6 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(5).jpg'
+const navarathri_7 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(6).jpg'
+const navarathri_8 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar%20(7).jpg'
+const navarathri_9 = 'https://ik.imagekit.io/hskzc0fkv/assests/Urchavar_Srinivasan.jpg'
+
+const logo = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png';
 
 // Day types for color highlighting
 export const DAY_TYPES = {
@@ -1002,7 +1015,7 @@ function assignSpecialImages() {
     });
 
     if (vijayadhasami) {
-        const navaratriImages = [aadi1, aadi2, aadi3, aadi4, aadi5, aadi6, aadi7, aadi8, aadi8];
+        const navaratriImages = [navarathri_1, navarathri_2, navarathri_3, navarathri_4, navarathri_5, navarathri_6, navarathri_7, navarathri_8, navarathri_9];
         // Assign aadi1-aadi9 to the 9 days before Vijayadhasami
         for (let i = 0; i < 9; i++) {
             const targetDate = new Date(2026, vijayadhasami.month, vijayadhasami.day - 9 + i);

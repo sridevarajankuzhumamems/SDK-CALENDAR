@@ -40,8 +40,17 @@ const MONTH_IMAGES = {
 };
 
 const MonthCalendar = () => {
+    // Get today's date
+    const today = new Date();
+    const todayYear = today.getFullYear();
+    const todayMonth = today.getMonth();
+    const todayDay = today.getDate();
+
+    // Start with current month (or January 2026 if before 2026, or December 2026 if after)
+    const initialMonth = todayYear === 2026 ? todayMonth : (todayYear < 2026 ? 0 : 11);
+
     const [currentYear, setCurrentYear] = useState(2026);
-    const [currentMonth, setCurrentMonth] = useState(0); // Start with January
+    const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [selectedDate, setSelectedDate] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0); // For image carousel
     // const [touchStart, setTouchStart] = useState(null);
@@ -123,7 +132,7 @@ const MonthCalendar = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-200 to-green-300 flex items-center justify-center p-2 sm:p-4">
+        <div className="min-h-screen bg-gradient-to-b from-green-200 to-green-300 flex items-center justify-center">
             <div
                 className="w-full cont max-w-full md:max-w-6xl bg-[#8fbc8f] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden"
             >
@@ -216,17 +225,19 @@ const MonthCalendar = () => {
                                 {daysWithData.map((dayData, i) => {
                                     const { day, tamilDate, panchangam, isSunday } = dayData;
                                     const isSelected = selectedDate?.day === day;
+                                    const isToday = todayYear === 2026 && todayMonth === currentMonth && todayDay === day;
 
                                     return (
                                         <button
                                             key={i}
                                             onClick={() => handleDateSelect(dayData)}
                                             className={`h-14 sm:h-24 md:h-28 border border-gray-50 relative transition-all duration-150 p-0.5 sm:p-1.5
-                                                ${getDayBackground(panchangam.dayType, isSelected)}`}
+                                                ${getDayBackground(panchangam.dayType, isSelected)}
+                                                ${isToday ? 'bg-green-100 border-t-0 border-l-0' : ''}`}
                                         >
 
                                             {/* Gregorian Date */}
-                                            <span className={`text-sm sm:text-lg font-bold block ${(isSunday || panchangam.isGovtHoliday) ? 'text-red-600' : 'text-gray-800'}`}>
+                                            <span className={`text-sm sm:text-lg font-bold block ${isToday ? 'text-green-600' : (isSunday || panchangam.isGovtHoliday) ? 'text-red-600' : 'text-gray-800'}`}>
                                                 {day}
                                             </span>
 
@@ -256,7 +267,13 @@ const MonthCalendar = () => {
                                             )}
 
 
-                                            {/* Event indicator removed */}
+                                            {/* Moon phase indicators */}
+                                            {(panchangam.tithi === "அமாவாசை" || (panchangam.events && panchangam.events.includes("அமாவாசை"))) && (
+                                                <span className="absolute bottom-1 left-1 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-black border border-gray-400" title="அமாவாசை"></span>
+                                            )}
+                                            {(panchangam.tithi === "பௌர்ணமி" || (panchangam.events && panchangam.events.includes("பௌர்ணமி"))) && (
+                                                <span className="absolute bottom-1 left-1 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white border border-gray-400" title="பௌர்ணமி"></span>
+                                            )}
 
 
                                             {/* Left image in cell (for dual image display) */}
@@ -375,8 +392,12 @@ const MonthCalendar = () => {
                                                 )}
                                             </>
                                         ) : (
-                                            <div className="w-full h-full min-h-[80px] md:min-h-[150px] flex items-center justify-center bg-gray-50 rounded-xl border-1 md:border-2 border-dashed border-gray-200">
-                                                <span className="text-[8px] md:text-xs text-gray-400 italic text-center px-1">படம் இல்லை <br /> (No Image)</span>
+                                            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 md:border-4 border-white ring-1 ring-gray-100">
+                                                <img
+                                                    src={logo}
+                                                    alt="SDK Logo"
+                                                    className="w-[120px] h-[180px] md:w-[200px] md:h-[300px] object-contain bg-white"
+                                                />
                                             </div>
                                         )}
                                     </div>
