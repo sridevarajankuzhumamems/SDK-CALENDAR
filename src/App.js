@@ -33,7 +33,7 @@ function App() {
         if (window.history.length > 1) {
           window.history.back();
         }
-      }, 1500);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [step]);
