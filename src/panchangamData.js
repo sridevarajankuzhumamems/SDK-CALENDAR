@@ -978,8 +978,8 @@ function assignSpecialImages() {
                 if (dayData.image) {
                     // Existing image on right, Eswaran Kovil on left
                     dayData.leftImage = dayImages[0];
-                    // Store all Eswaran Kovil images for carousel
-                    dayData.imageArray = dayImages;
+                    // Include existing image + all Eswaran Kovil images in carousel
+                    dayData.imageArray = [dayData.image, ...dayImages];
                 } else {
                     dayData.image = dayImages[0];
                     // Store additional images for carousel if more than 1
