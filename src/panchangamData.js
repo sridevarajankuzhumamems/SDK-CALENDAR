@@ -44,6 +44,7 @@ const pmk_day_7 = 'https://ik.imagekit.io/hskzc0fkv/assests/Pmk-day-7.jpg';
 const pmk_day_8 = 'https://ik.imagekit.io/hskzc0fkv/assests/Pmk-day-8.jpg';
 const pmk_day_9 = 'https://ik.imagekit.io/hskzc0fkv/assests/Pmk-day-9.jpg';
 const pmk_day_10 = 'https://ik.imagekit.io/hskzc0fkv/assests/Pmk-day-10.jpg';
+const pmk_day_10_1 = 'https://ik.imagekit.io/hskzc0fkv/WhatsApp%20Image%202026-01-08%20at%2002.21.55.jpeg'
 
 //Pmk aadi
 const aadi1 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi1.jpg';
@@ -923,6 +924,10 @@ function assignSpecialImages() {
             if (PANCHANGAM_2026[m] && PANCHANGAM_2026[m][d]) {
                 const dayData = PANCHANGAM_2026[m][d];
                 dayData.image = pmkImages[i];
+                // Add secondary image for day 10 (last day)
+                if (i === 9) {
+                    dayData.secondaryImage = pmk_day_10_1;
+                }
             }
         }
     }
