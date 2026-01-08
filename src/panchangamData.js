@@ -57,6 +57,8 @@ const aadi8 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi8.jpeg';
 const aadi9 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi9.jpeg';
 const aadi10 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi10.jpg';
 
+const aadilastvelli = 'https://ik.imagekit.io/hskzc0fkv/Aadi%20last%20Friday.jpg'
+
 const vijaya_dhasami = 'https://ik.imagekit.io/hskzc0fkv/assests/Vijayadhasami.jpg';
 
 const mandala_poojai = 'https://ik.imagekit.io/hskzc0fkv/assests/mandala%20abhisegam.jpg';
@@ -805,14 +807,24 @@ function assignSpecialImages() {
     });
 
     // Second pass: Assign unjal_sevai to last Friday of each Tamil month
+    // Special case for Aadi month - use aadilastvelli image
     Object.keys(tamilMonthLastDays).forEach(tamilMonth => {
         const info = tamilMonthLastDays[tamilMonth];
-        if (info.data && !info.data.image) {
-            info.data.image = unjal_sevai;
-            // Add event if not already present
-            if (!info.data.events.includes("ஊஞ்சல் சேவை")) {
-                info.data.events.push("ஊஞ்சல் சேவை");
-                info.data.festival = info.data.events.join(", ");
+        if (info.data) {
+            if (tamilMonth === "ஆடி") {
+                // Special image for Aadi last Friday
+                info.data.image = aadilastvelli;
+                if (!info.data.events.includes("ஆடி கடை வெள்ளி ஊஞ்சல் சேவை")) {
+                    info.data.events.push("ஆடி கடை வெள்ளி ஊஞ்சல் சேவை");
+                    info.data.festival = info.data.events.join(", ");
+                }
+            } else if (!info.data.image) {
+                // Regular unjal_sevai for other months
+                info.data.image = unjal_sevai;
+                if (!info.data.events.includes("ஊஞ்சல் சேவை")) {
+                    info.data.events.push("ஊஞ்சல் சேவை");
+                    info.data.festival = info.data.events.join(", ");
+                }
             }
         }
     });
@@ -940,7 +952,7 @@ function assignSpecialImages() {
             [pmk_eswaran_kovil_5, pmk_eswaran_kovil_5_1], // Day 5
             [pmk_eswaran_kovil_6, pmk_day_1], // Day 6
             [pmk_eswaran_kovil_7, pmk_day_2], // Day 7
-            [pmk_eswaran_kovil_8,pmk_day_3], // Day 8
+            [pmk_eswaran_kovil_8, pmk_day_3], // Day 8
             [pmk_eswaran_kovil_9, pmk_day_4], // Day 9
             [pmk_eswaran_kovil_10, pmk_day_5] // Day 10
         ];
