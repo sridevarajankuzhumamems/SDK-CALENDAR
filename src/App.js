@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MonthCalendar from "./MonthCalendar";
 import Auth from "./Auth";
 import { isAuthenticated } from "./utils/auth";
@@ -7,7 +7,10 @@ const introImgmobile = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Mobi
 const introImglaptop = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Laptop%20%20(1).jpg'
 
 function App() {
-  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar'
+  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exit_confirm'
+  const [showExitMessage, setShowExitMessage] = useState(false);
+  const backPressRef = useRef(false);
+  const backTimerRef = useRef(null);
 
   useEffect(() => {
     if (step === 'loading') {
@@ -15,7 +18,7 @@ function App() {
         setStep('intro');
       }, 1100);
       return () => clearTimeout(timer);
-    } else if (step === 'intro') {
+    } else if (step === 'intro' && !showExitMessage) {
       const timer = setTimeout(() => {
         // Check if user is authenticated
         if (isAuthenticated()) {
@@ -25,6 +28,48 @@ function App() {
         }
       }, 1800);
       return () => clearTimeout(timer);
+    }
+  }, [step, showExitMessage]);
+
+  // Handle back button press
+  useEffect(() => {
+    if (step === 'calendar') {
+      // Push a dummy state to enable back button detection
+      window.history.pushState({ page: 'calendar' }, '');
+
+      const handlePopState = (e) => {
+        if (backPressRef.current) {
+          // Second back press - close the app
+          window.close();
+          // If window.close() doesn't work (browser restriction), show a message
+          // or navigate away
+          return;
+        }
+
+        // First back press - show exit confirmation
+        backPressRef.current = true;
+        setStep('intro');
+        setShowExitMessage(true);
+
+        // Push state again to catch next back press
+        window.history.pushState({ page: 'exit_confirm' }, '');
+
+        // Reset after 2 seconds
+        backTimerRef.current = setTimeout(() => {
+          backPressRef.current = false;
+          setShowExitMessage(false);
+          setStep('calendar');
+        }, 2000);
+      };
+
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        if (backTimerRef.current) {
+          clearTimeout(backTimerRef.current);
+        }
+      };
     }
   }, [step]);
 
@@ -190,6 +235,14 @@ function App() {
           alt="Intro"
           className="w-full h-full object-cover animate-in fade-in zoom-in-110 duration-1000 hidden md:block"
         />
+        {/* Exit confirmation message */}
+        {showExitMessage && (
+          <div className="absolute bottom-20 left-0 right-0 flex justify-center animate-in fade-in slide-in-from-bottom duration-300">
+            <div className="bg-black/80 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
+              Press again to exit
+            </div>
+          </div>
+        )}
       </div>
     );
   }
