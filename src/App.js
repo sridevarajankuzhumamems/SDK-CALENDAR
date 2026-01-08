@@ -34,15 +34,24 @@ function App() {
   // Handle back button press
   useEffect(() => {
     if (step === 'calendar') {
-      // Push a dummy state to enable back button detection
+      // Push multiple dummy states to ensure back button doesn't exit immediately
+      window.history.pushState({ page: 'app' }, '');
       window.history.pushState({ page: 'calendar' }, '');
 
       const handlePopState = (e) => {
+        e.preventDefault();
+
         if (backPressRef.current) {
-          // Second back press - close the app
-          window.close();
-          // If window.close() doesn't work (browser restriction), show a message
-          // or navigate away
+          // Second back press within 2 seconds - close/exit
+          // For PWA or apps that support it
+          if (window.navigator && window.navigator.app && window.navigator.app.exitApp) {
+            window.navigator.app.exitApp();
+          } else {
+            // For mobile browsers, we can't force close, 
+            // so just stay on intro and let user close manually
+            setShowExitMessage(false);
+            backPressRef.current = false;
+          }
           return;
         }
 
@@ -51,7 +60,8 @@ function App() {
         setStep('intro');
         setShowExitMessage(true);
 
-        // Push state again to catch next back press
+        // Push states again to catch next back press
+        window.history.pushState({ page: 'app' }, '');
         window.history.pushState({ page: 'exit_confirm' }, '');
 
         // Reset after 2 seconds
@@ -59,6 +69,9 @@ function App() {
           backPressRef.current = false;
           setShowExitMessage(false);
           setStep('calendar');
+          // Re-push history states
+          window.history.pushState({ page: 'app' }, '');
+          window.history.pushState({ page: 'calendar' }, '');
         }, 2000);
       };
 
