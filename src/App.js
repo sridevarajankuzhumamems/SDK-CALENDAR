@@ -5,9 +5,18 @@ import { isAuthenticated } from "./utils/auth";
 const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png";
 const introImgmobile = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Mobile%20%20(5).jpg';
 const introImglaptop = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Laptop%20%20(1).jpg'
+const credits = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK%20Credits.jpg'
 
 function App() {
-  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exiting'
+  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exiting', 'credits'
+
+  // Calculate initial month (current month if 2026, else January or December)
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth();
+  const initialMonth = todayYear === 2026 ? todayMonth : (todayYear < 2026 ? 0 : 11);
+
+  const [currentMonth, setCurrentMonth] = useState(initialMonth);
 
   useEffect(() => {
     if (step === 'loading') {
@@ -41,7 +50,7 @@ function App() {
   // Handle back button press and swipe gestures
   useEffect(() => {
     // Push multiple history states on mount to prevent immediate back navigation
-    if (step === 'calendar' || step === 'auth') {
+    if (step === 'calendar' || step === 'auth' || step === 'credits') {
       // Push multiple states to create a buffer for swipe gestures
       window.history.pushState({ page: 'app1' }, '');
       window.history.pushState({ page: 'app2' }, '');
@@ -51,7 +60,12 @@ function App() {
 
   useEffect(() => {
     const handlePopState = (event) => {
-      if (step === 'calendar' || step === 'auth') {
+      if (step === 'credits') {
+        // Go back to calendar from credits
+        event.preventDefault();
+        setStep('calendar');
+        window.history.pushState({ page: 'calendar' }, '');
+      } else if (step === 'calendar' || step === 'auth') {
         // Prevent default back navigation
         event.preventDefault();
         // Show exit screen
@@ -267,9 +281,28 @@ function App() {
     return <Auth onAuthSuccess={handleAuthSuccess} />;
   }
 
+  if (step === 'credits') {
+    return (
+      <div
+        className="fixed inset-0 z-50 bg-[#0c0600] flex items-center justify-center cursor-pointer"
+        onClick={() => setStep('calendar')}
+      >
+        <img
+          src={credits}
+          alt="Credits"
+          className="max-w-full max-h-full object-contain animate-in fade-in zoom-in-95 duration-500"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen w-full bg-[#0c0600] animate-in fade-in zoom-in-75 duration-1000 ease-out">
-      <MonthCalendar />
+      <MonthCalendar
+        onShowCredits={() => setStep('credits')}
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+      />
     </div>
   );
 }

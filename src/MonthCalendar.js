@@ -39,18 +39,14 @@ const MONTH_IMAGES = {
     11: decemberImg
 };
 
-const MonthCalendar = () => {
+const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
     // Get today's date
     const today = new Date();
     const todayYear = today.getFullYear();
     const todayMonth = today.getMonth();
     const todayDay = today.getDate();
 
-    // Start with current month (or January 2026 if before 2026, or December 2026 if after)
-    const initialMonth = todayYear === 2026 ? todayMonth : (todayYear < 2026 ? 0 : 11);
-
     const [currentYear, setCurrentYear] = useState(2026);
-    const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [selectedDate, setSelectedDate] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0); // For image carousel
     // const [touchStart, setTouchStart] = useState(null);
@@ -429,8 +425,16 @@ const MonthCalendar = () => {
                 )}
 
                 {/* Footer */}
-                <div className="text-center pb-4 text-white/80 text-sm">
-                    ← Previous  |  Next →
+                <div className="text-center py-4">
+                    <button
+                        onClick={onShowCredits}
+                        className="px-6 py-2 bg-gradient-to-r from-amber-600/80 via-yellow-500/80 to-amber-600/80 text-white text-sm font-semibold rounded-full border-2 border-yellow-400/50 shadow-lg shadow-amber-500/30 hover:shadow-amber-400/50 hover:scale-105 hover:border-yellow-300 transition-all duration-300 backdrop-blur-sm"
+                    >
+                        ✨ Collaborators & Credits ✨
+                    </button>
+                    <p className="mt-3 text-white/60 text-xs">
+                        © 2026 Sri Devarajan Kuzhumam. All Rights Reserved.
+                    </p>
                 </div>
             </div>
         </div>
