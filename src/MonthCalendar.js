@@ -190,7 +190,7 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                     <div style={{ margin: '0 auto', width: 'fit-content', display: "flex", alignItems: "center", gap: "8px" }} className="">
                         <img src={logo} alt="SDK Logo" width="28" />
                         <span className="text-center inline-block text-sm sm:text-base md:text-lg font-semibold"
-                            style={{ fontFamily: 'cursive' }}>
+                            style={{ fontFamily: "'Playfair Display', serif" }}>
                             SRI DEVARAJAN KUZHUMAM - EMS
                         </span>
                         <img src={logo} alt="SDK Logo" width="28" />
