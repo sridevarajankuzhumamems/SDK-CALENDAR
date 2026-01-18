@@ -881,7 +881,7 @@ function assignSpecialImages() {
                     data.events.push("லக்ஷார்ஜனை");
                 }
             }
-            if (data.tamil_date.startsWith("மார்கழி") && data.tithi === "ஏகாதசி") {
+            if (data.tamil_date.startsWith("மார்கழி") && data.tithi === "ஏகாதசி" && parseInt(month) === 11) {
                 if (data.image) {
                     data.leftImage = vaigundam;
                     data.secondaryImage = vaigundam;
