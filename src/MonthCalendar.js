@@ -46,11 +46,12 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
     const todayMonth = today.getMonth();
     const todayDay = today.getDate();
 
-    const [currentYear, setCurrentYear] = useState(2026);
+    const [currentYear] = useState(2026);
     const [selectedDate, setSelectedDate] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0); // For image carousel
     // State to store the center coordinates of the clicked date cell
     const [animOrigin, setAnimOrigin] = useState({ x: 0, y: 0 });
+    const [direction, setDirection] = useState('forward');
 
     const monthName = MONTH_NAMES[currentMonth];
 
@@ -81,8 +82,10 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
     }, [currentYear, currentMonth]);
 
     // Navigation handlers - restricted to 2026 only
+    // Navigation handlers - restricted to 2026 only
     const goToPreviousMonth = () => {
         if (currentMonth > 0) {
+            setDirection('backward');
             setCurrentMonth(currentMonth - 1);
         }
         setSelectedDate(null);
@@ -90,6 +93,7 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
 
     const goToNextMonth = () => {
         if (currentMonth < 11) {
+            setDirection('forward');
             setCurrentMonth(currentMonth + 1);
         }
         setSelectedDate(null);
@@ -199,7 +203,10 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                     {/* Left Column: Month Image (Desktop) / Top Section (Mobile) */}
                     <div className="md:w-5/12 lg:w-4/12 flex items-start justify-center">
                         {MONTH_IMAGES[currentMonth] && (
-                            <div className="w-full h-full max-w-[400px] md:max-w-[500px] lg:max-w-none rounded-2xl overflow-hidden shadow-2xl border-8 border-white/20 transform transition hover:scale-[1.02] duration-500">
+                            <div
+                                key={currentMonth}
+                                className={`w-full h-full max-w-[400px] md:max-w-[500px] lg:max-w-none rounded-2xl overflow-hidden shadow-2xl border-8 border-white/20 transform transition hover:scale-[1.02] duration-500 ${direction === 'forward' ? 'anim-next' : 'anim-prev'}`}
+                            >
                                 <img
                                     src={MONTH_IMAGES[currentMonth]}
                                     alt={`${monthName} decoration`}
@@ -246,7 +253,10 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
 
 
                         {/* Calendar Grid Container */}
-                        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 transition-all duration-300">
+                        <div
+                            key={currentMonth}
+                            className={`bg-white rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 transition-all duration-300 ${direction === 'forward' ? 'anim-next' : 'anim-prev'}`}
+                        >
                             {/* Weekday Headers */}
                             <div className="grid grid-cols-7 bg-gray-50 border-b border-gray-100">
                                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, idx) => (
