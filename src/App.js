@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
 import Auth from "./Auth";
-import { isAuthenticated } from "./utils/auth";
+import { isAuthenticated, getUser } from "./utils/auth";
 const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png";
 const introImgmobile = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Mobile%20%20(5).jpg';
 const introImglaptop = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Laptop%20%20(1).jpg'
@@ -44,6 +44,26 @@ function App() {
         }
       }, 1000);
       return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  // Logging API call when user enters the calendar
+  useEffect(() => {
+    if (step === 'calendar') {
+      const user = getUser();
+      if (user) {
+        fetch('https://sdk-calendar-be-1.onrender.com/api/logs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            phone: user.phone
+          })
+        }).catch(err => console.error('Logging failed:', err));
+      }
     }
   }, [step]);
 
