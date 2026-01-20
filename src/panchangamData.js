@@ -4,7 +4,7 @@
 // Using ImageKit CDN for optimized image loading
 const andal_malai = 'https://ik.imagekit.io/hskzc0fkv/assests/andal_malai_matram.jpg';
 const radha_sapthami = 'https://ik.imagekit.io/hskzc0fkv/assests/Jan_25_RathaSapthami.jpg';
-const vidai_atru = 'https://ik.imagekit.io/hskzc0fkv/assests/thai-1.jpg';
+const vidai_atru = 'https://ik.imagekit.io/hskzc0fkv/assests/IMG_20260115_184442.jpg';
 const punnim = 'https://ik.imagekit.io/hskzc0fkv/assests/Punnim.jpg';
 const unjal_sevai = 'https://ik.imagekit.io/hskzc0fkv/assests/Unjal_Sevai_Final.jpg';
 
@@ -21,7 +21,7 @@ const day8 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_27_Vennaithali(1).jpg
 const day9 = 'https://ik.imagekit.io/hskzc0fkv/assests/WhatsApp%20Image%202026-01-03%20at%2015.17.53.jpeg';
 const day10 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_29_Therthavaari.jpg';
 const day11 = 'https://ik.imagekit.io/hskzc0fkv/assests/IMG-20250611-WA0085.jpg';
-const day12 = 'https://ik.imagekit.io/hskzc0fkv/1000242482.jpg';
+const day12 = 'https://ik.imagekit.io/hskzc0fkv/assests/May_31_Kuthrai.jpg?updatedAt=1767874152472';
 const day13 = 'https://ik.imagekit.io/hskzc0fkv/assests/Jun_1_Day_3.jpg';
 const day14 = 'https://ik.imagekit.io/hskzc0fkv/assests/Jun_2_Day_4.jpg';
 const day15 = 'https://ik.imagekit.io/hskzc0fkv/assests/Jun_3_Day_5.jpg';
@@ -72,6 +72,8 @@ const aadi10 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi10.jpg';
 
 const aadilastvelli = 'https://ik.imagekit.io/hskzc0fkv/Aadi%20last%20Friday.jpg'
 const aadiamavasai = 'https://ik.imagekit.io/hskzc0fkv/aadiamavasai.jpeg'
+
+const karthigai_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Karthikai_1.jpg'
 
 const vijaya_dhasami = 'https://ik.imagekit.io/hskzc0fkv/assests/Vijayadhasami.jpg';
 
@@ -359,7 +361,7 @@ const MAY_2026_DATA = {
     16: { tamil_date: "வைகாசி 2", nakshatra: "பரணி", tithi: "அமாவாசை", events: ["அமாவாசை"] },
     17: { tamil_date: "வைகாசி 3", nakshatra: "கார்த்திகை", tithi: "த்விதியை", events: [] },
     18: { tamil_date: "வைகாசி 4", nakshatra: "ரோகிணி", tithi: "த்ரிதியை", events: [] },
-    19: { tamil_date: "வைகாசி 5", nakshatra: "மிருகசீரிடம்", tithi: "சதுர்த்தி", events: ["ஸ்ரீ வரதராஜப் பெருமாள் பிரமோற்சவம் ஆரம்பம் இரவு காப்புக் கட்டு", "சங்கடஹர சதுர்த்தி"] },
+    19: { tamil_date: "வைகாசி 5", nakshatra: "மிருகசீரிடம்", tithi: "சதுர்த்தி", events: ["ஸ்ரீ வரதராஜப் பெருமாள் 224வது பிரமோற்சவம் ஆரம்பம் இரவு காப்புக் கட்டு", "சங்கடஹர சதுர்த்தி"] },
     20: { tamil_date: "வைகாசி 6", nakshatra: "திருவாதிரை", tithi: "பஞ்சமி", events: ["முதல் நாள் காலை த்வஜாரோஹணம் இரவு அன்ன வாகனம்"] },
     21: { tamil_date: "வைகாசி 7", nakshatra: "பூசம்", tithi: "ஷஷ்டி", events: ["இரண்டாம் நாள் காலை ரெங்கமன்னார் திருப்பல்லக்கு - இரவு சிம்ம வாகனம்", "ஷஷ்டி விரதம்"] },
     22: { tamil_date: "வைகாசி 8", nakshatra: "ஆயில்யம்", tithi: "ஸப்தமி", events: ["மூன்றாம் நாள் காலை ராமர் சேவை திருப்பல்லக்கு — இரவு சேஷ வாகனம்", "வைகாசி விசாகம்"] },
@@ -370,7 +372,7 @@ const MAY_2026_DATA = {
     27: { tamil_date: "வைகாசி 13", nakshatra: "அஸ்தம்", tithi: "த்வாதசி", events: ["எட்டாம் நாள் மாலை வெண்ணைத்தாழி நவநீத கிருஷ்ணன் சேவை"] },
     28: { tamil_date: "வைகாசி 14", nakshatra: "சித்திரை", tithi: "த்ரயோதசி", events: ["ஒன்பதாம் நாள் அதிகாலை குதிரை வாகனம் - மாலை ரதாரோஹணம் - இரவு சப்தாவரணம்", "பிரதோஷம்", "பக்ரீத்"] },
     29: { tamil_date: "வைகாசி 15", nakshatra: "சுவாதி", tithi: "சதுர்த்தசி", events: ["பத்தாம் நாள் காலை தீர்த்தவாரி இரவு த்வஜாவரோஹணம்"] },
-    30: { tamil_date: "வைகாசி 16", nakshatra: "விசாகம்", tithi: "பௌர்ணமி", events: ["வசந்தோத்ஸவம் முதல் நாள் கள்ளர் திருக்கோலத்தில் வைகை எழுந்தருளல்", "பௌர்ணமி"] },
+    30: { tamil_date: "வைகாசி 16", nakshatra: "விசாகம்", tithi: "பௌர்ணமி", events: ["ஸ்ரீ வரதராஜப் பெருமாள் 119வது வசந்தோத்ஸவம் முதல் நாள் கள்ளர் திருக்கோலத்தில் வைகை எழுந்தருளல்", "பௌர்ணமி"] },
     31: { tamil_date: "வைகாசி 17", nakshatra: "அனுஷம்", tithi: "பிரதமை", events: ["குதிரை வாகனம் வண்டியூர் திருவிழா"] }
 };
 
@@ -739,6 +741,16 @@ function assignSpecialImages() {
             // Tamil New Year Image Assignment
             if (data.tamil_date === "சித்திரை 1") {
                 data.image = tamilnewyear;
+            }
+
+            // Karthigai 1 Image Assignment
+            if (data.tamil_date === "கார்த்திகை 1") {
+                if (data.image) {
+                    data.leftImage = karthigai_1;
+                    data.secondaryImage = karthigai_1;
+                } else {
+                    data.image = karthigai_1;
+                }
             }
 
             // Gajendra Motcham Image Assignment

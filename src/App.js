@@ -9,6 +9,7 @@ const credits = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK%20Credits%20&%20Cr
 
 function App() {
   const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exiting', 'credits'
+  const [isIntroClosing, setIsIntroClosing] = useState(false);
 
   // Calculate initial month (current month if 2026, else January or December)
   const today = new Date();
@@ -25,6 +26,10 @@ function App() {
       }, 3000);
       return () => clearTimeout(timer);
     } else if (step === 'intro') {
+      const closingTimer = setTimeout(() => {
+        setIsIntroClosing(true);
+      }, 2000); // Start closing animation after 2s
+
       const timer = setTimeout(() => {
         // Check if user is authenticated
         if (isAuthenticated()) {
@@ -32,8 +37,11 @@ function App() {
         } else {
           setStep('auth');
         }
-      }, 2000);
-      return () => clearTimeout(timer);
+      }, 3000); // Transition after 3s (1s animation window)
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(closingTimer);
+      };
     } else if (step === 'exiting') {
       const timer = setTimeout(() => {
         // Try to close the window/app
@@ -261,7 +269,7 @@ function App() {
 
   if (step === 'intro') {
     return (
-      <div className="fixed inset-0 z-50 bg-[#0c0600]">
+      <div className={`fixed inset-0 z-50 bg-[#0c0600] transition-all duration-1000 ease-in-out ${isIntroClosing ? 'scale-110 opacity-0 blur-sm' : 'scale-100 opacity-100'}`}>
         {/* Mobile image */}
         <img
           src={introImgmobile}
@@ -274,6 +282,8 @@ function App() {
           alt="Intro"
           className="w-full h-full object-cover animate-in fade-in zoom-in-110 duration-1000 hidden md:block"
         />
+        {/* Cinematic Transition Overlay */}
+        <div className={`absolute inset-0 bg-white/10 pointer-events-none transition-opacity duration-700 ${isIntroClosing ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
     );
   }
