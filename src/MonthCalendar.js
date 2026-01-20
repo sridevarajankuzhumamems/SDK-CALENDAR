@@ -228,15 +228,15 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                             <button
                                 onClick={goToPreviousMonth}
                                 disabled={currentMonth === 0}
-                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-green-700 hover:scale-110 active:scale-95'}`}
+                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-black hover:scale-110 active:scale-95'}`}
                             >
                                 ◀
                             </button>
                             <div className="flex flex-col items-center">
-                                <span className="text-white font-bold text-sm sm:text-base tracking-widest uppercase">{monthName.toUpperCase()} - {currentYear}</span>
+                                <span className="text-black font-bold text-sm sm:text-base tracking-widest uppercase">{monthName.toUpperCase()} - {currentYear}</span>
                                 <div className="flex gap-1">
                                     {tamilMonths.map((tm, idx) => (
-                                        <span key={idx} className="text-[10px] text-white/90 font-medium">
+                                        <span key={idx} className="text-[10px] text-black/80 font-medium">
                                             {tm.name} {idx < tamilMonths.length - 1 ? '•' : ''}
                                         </span>
                                     ))}
@@ -245,7 +245,7 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                             <button
                                 onClick={goToNextMonth}
                                 disabled={currentMonth === 11}
-                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 11 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-green-700 hover:scale-110 active:scale-95'}`}
+                                className={`w-8 h-8 flex items-center justify-center rounded-full shadow transition-all duration-200 text-lg font-bold ${currentMonth === 11 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white/90 hover:bg-white text-black hover:scale-110 active:scale-95'}`}
                             >
                                 ▶
                             </button>
@@ -495,10 +495,10 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                     >
                         ✨ Collaborators & Credits ✨
                     </button>
-                    <p className="mt-3 text-white/70 text-xs">
+                    <p className="mt-3 text-black/70 text-xs">
                         © 2026 Sri Devarajan Kuzhumam. All Rights Reserved.
                     </p>
-                    <p className="mt-2 text-white/90 text-[12px] px-4">
+                    <p className="mt-2 text-black/90 text-[12px] px-4">
                         குறிப்பு: இக்காலண்டர் சில சந்தர்ப்பங்களில் தவறாக காட்டலாம். துல்லியமான அப்டேட்டுகளுக்கு{' '}
                         <a
                             href="https://devarajan-calendar.vercel.app/"
