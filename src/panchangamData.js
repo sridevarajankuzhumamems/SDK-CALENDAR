@@ -73,7 +73,7 @@ const aadi10 = 'https://ik.imagekit.io/hskzc0fkv/assests/aadi10.jpg';
 const aadilastvelli = 'https://ik.imagekit.io/hskzc0fkv/Aadi%20last%20Friday.jpg'
 const aadiamavasai = 'https://ik.imagekit.io/hskzc0fkv/aadiamavasai.jpeg'
 
-const karthigai_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Karthikai_1.jpg'
+const karthigai_1 = 'https://ik.imagekit.io/hskzc0fkv/assests/Karthikai_1%20(1).jpg'
 
 const vijaya_dhasami = 'https://ik.imagekit.io/hskzc0fkv/assests/Vijayadhasami.jpg';
 
