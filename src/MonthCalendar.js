@@ -39,7 +39,7 @@ const MONTH_IMAGES = {
     11: decemberImg
 };
 
-const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
+const MonthCalendar = ({ onShowCredits, onShowEssentials, currentMonth, setCurrentMonth }) => {
     // Get today's date
     const today = new Date();
     const todayYear = today.getFullYear();
@@ -498,10 +498,20 @@ const MonthCalendar = ({ onShowCredits, currentMonth, setCurrentMonth }) => {
                     <p className="mt-3 text-black/70 text-xs">
                         © 2026 Sri Devarajan Kuzhumam. All Rights Reserved.
                     </p>
+
+                    <div className="mt-2 text-center">
+                        <button
+                            onClick={onShowEssentials}
+                            className="text-[13px] text-blue-800 hover:text-blue-900 underline font-medium cursor-pointer transition-colors"
+                        >
+                            Essentials | அடிப்படை தகவல்கள்
+                        </button>
+                    </div>
+
                     <p className="mt-2 text-black/90 text-[12px] px-4">
                         குறிப்பு: இக்காலண்டர் சில சந்தர்ப்பங்களில் தவறாக காட்டலாம். துல்லியமான அப்டேட்டுகளுக்கு{' '}
                         <a
-                            href="https://devarajan-calendar.vercel.app/"
+                            href="https://sdkcalendar.vercel.app/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white underline hover:text-white-300"

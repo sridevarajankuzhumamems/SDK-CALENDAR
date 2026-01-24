@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
+import Essentials from "./Essentials";
 import Auth from "./Auth";
 import { isAuthenticated, getUser } from "./utils/auth";
-const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/SDK%20LG_DK%201.png";
+const sdkLogo = "https://ik.imagekit.io/hskzc0fkv/assests/SDK_Logo_Final.png";
 const introImgmobile = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Mobile%20%20(5).jpg';
 const introImglaptop = 'https://ik.imagekit.io/hskzc0fkv/Second%20Loading%20Laptop%20%20(1).jpg'
 const credits = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK%20Credits%20&%20Creators%20.jpg'
 const laptopcredits = 'https://ik.imagekit.io/hskzc0fkv/assests/SDK_Credits%20&%20Creators%20%20(Website).jpg'
 
 function App() {
-  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exiting', 'credits'
+  const [step, setStep] = useState('loading'); // 'loading', 'intro', 'auth', 'calendar', 'exiting', 'credits', 'essentials'
   const [isIntroClosing, setIsIntroClosing] = useState(false);
 
   // Calculate initial month (current month if 2026, else January or December)
@@ -79,7 +80,7 @@ function App() {
   // Handle back button press and swipe gestures
   useEffect(() => {
     // Push multiple history states on mount to prevent immediate back navigation
-    if (step === 'calendar' || step === 'auth' || step === 'credits') {
+    if (step === 'calendar' || step === 'auth' || step === 'credits' || step === 'essentials') {
       // Push multiple states to create a buffer for swipe gestures
       window.history.pushState({ page: 'app1' }, '');
       window.history.pushState({ page: 'app2' }, '');
@@ -91,6 +92,11 @@ function App() {
     const handlePopState = (event) => {
       if (step === 'credits') {
         // Go back to calendar from credits
+        event.preventDefault();
+        setStep('calendar');
+        window.history.pushState({ page: 'calendar' }, '');
+      } else if (step === 'essentials') {
+        // Go back to calendar from essentials
         event.preventDefault();
         setStep('calendar');
         window.history.pushState({ page: 'calendar' }, '');
@@ -328,10 +334,15 @@ function App() {
     );
   }
 
+  if (step === 'essentials') {
+    return <Essentials onBack={() => setStep('calendar')} />;
+  }
+
   return (
     <div className="min-h-screen w-full bg-[#0c0600] animate-in fade-in zoom-in-75 duration-1000 ease-out">
       <MonthCalendar
         onShowCredits={() => setStep('credits')}
+        onShowEssentials={() => setStep('essentials')}
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
       />
