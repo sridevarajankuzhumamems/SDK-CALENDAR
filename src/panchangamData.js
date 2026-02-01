@@ -87,7 +87,7 @@ const srinivasan_2 = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CA
 const thirumangai_alvar = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Karthigai_Chitrai(S)_Thirumangai_Azlvar.jpg';
 const ramanujar_jeyanthi = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Ramanujar_Jayanthi.jpg'
 const aadipooram = 'https://ik.imagekit.io/hskzc0fkv/Aadipooram.jpg'
-const karthigai = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Karthigai.jpg?updatedAt=1767874152540'
+const karthigai = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/karthigai.jpg'
 const diwali = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Diwali.jpg'
 const thaipusam = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Feb_1_Thaipusam.jpg'
 const chakaram = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Chakarrathalvar_Jeyathi.jpg'
@@ -710,10 +710,7 @@ function assignSpecialImages() {
         Object.keys(monthData).forEach(day => {
             const data = monthData[day];
 
-            // Add punnim image for Pournami days (if no existing image)
-            if (data.events && data.events.some(e => e.includes("பௌர்ணமி")) && !data.image) {
-                data.image = punnim;
-            }
+
 
             // Masi Magam Image Assignment
             if (data.tamil_date.startsWith("மாசி") && data.nakshatra === "மகம்") {
@@ -1405,6 +1402,25 @@ function assignSpecialImages() {
             }
         }
     }
+
+    // Second pass: Assign Pournami images after all other festivals are assigned
+    Object.keys(PANCHANGAM_2026).forEach(month => {
+        const monthData = PANCHANGAM_2026[month];
+        Object.keys(monthData).forEach(day => {
+            const data = monthData[day];
+            // Add punnim image for Pournami days (priority to existing image, add as secondary if exists)
+            if (data.tithi === "பௌர்ணமி" || (data.events && data.events.some(e => e.includes("பௌர்ணமி")))) {
+                if (data.image) {
+                    if (data.image !== punnim) {
+                        data.leftImage = punnim;
+                        data.secondaryImage = punnim;
+                    }
+                } else {
+                    data.image = punnim;
+                }
+            }
+        });
+    });
 
     // Final pass: Add Pournami Purappadu event for all days with Punnim image (including Masi Magam)
     Object.keys(PANCHANGAM_2026).forEach(month => {
