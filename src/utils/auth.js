@@ -2,6 +2,7 @@
 
 const TOKEN_KEY = 'calendar_auth_token';
 const USER_KEY = 'calendar_user';
+const SDK_ID_KEY = 'calendar_sdk_id';
 
 export const getToken = () => {
     return localStorage.getItem(TOKEN_KEY);
@@ -11,9 +12,18 @@ export const setToken = (token) => {
     localStorage.setItem(TOKEN_KEY, token);
 };
 
+export const getSdkId = () => {
+    return localStorage.getItem(SDK_ID_KEY);
+};
+
+export const setSdkId = (sdkId) => {
+    localStorage.setItem(SDK_ID_KEY, sdkId);
+};
+
 export const clearToken = () => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(SDK_ID_KEY);
 };
 
 export const isAuthenticated = () => {

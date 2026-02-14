@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { setSdkId } from './utils/auth';
 
 const Auth = ({ onAuthSuccess }) => {
     const [formData, setFormData] = useState({
@@ -36,6 +37,12 @@ const Auth = ({ onAuthSuccess }) => {
             if (data.success) {
                 // Store token in localStorage
                 localStorage.setItem('calendar_auth_token', data.token);
+
+                // Store SDK ID in localStorage
+                if (data.sdkId) {
+                    setSdkId(data.sdkId);
+                }
+
                 localStorage.setItem('calendar_user', JSON.stringify({
                     name: formData.name,
                     email: formData.email,

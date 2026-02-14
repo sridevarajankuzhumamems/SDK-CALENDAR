@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MonthCalendar from "./MonthCalendar";
 import Essentials from "./Essentials";
 import Auth from "./Auth";
-import { isAuthenticated, getUser } from "./utils/auth";
+import { isAuthenticated, getUser, getSdkId } from "./utils/auth";
 const sdkLogo = "https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/SDK_Logo_Final.png";
 const introImgmobile = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Second-Loading-Mobile.jpg';
 const introImglaptop = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Second-loading-laptop.jpg'
@@ -62,6 +62,9 @@ function App() {
     if (step === 'calendar') {
       const user = getUser();
       if (user) {
+        // Retrieve SDK ID from localStorage
+        const sdkId = getSdkId();
+
         fetch('https://sdk-calendar-be-1.onrender.com/api/logs', {
           method: 'POST',
           headers: {
@@ -70,7 +73,8 @@ function App() {
           body: JSON.stringify({
             name: user.name,
             email: user.email,
-            phone: user.phone
+            phone: user.phone,
+            sdkId: sdkId || 'N/A'
           })
         }).catch(err => console.error('Logging failed:', err));
       }
