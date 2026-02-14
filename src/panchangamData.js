@@ -1403,13 +1403,14 @@ function assignSpecialImages() {
         }
     }
 
-    // Second pass: Assign Pournami images after all other festivals are assigned
+    // Second pass: Assign Pournami images only for Chithirai and Aadi months
     Object.keys(PANCHANGAM_2026).forEach(month => {
         const monthData = PANCHANGAM_2026[month];
         Object.keys(monthData).forEach(day => {
             const data = monthData[day];
-            // Skip April (month 3) and August (month 7) for Pournami images
-            if (parseInt(month) === 3 || parseInt(month) === 7) {
+            // Only assign Pournami images for Chithirai and Aadi Tamil months
+            const tamilMonth = data.tamil_date.split(" ")[0];
+            if (tamilMonth !== "சித்திரை" && tamilMonth !== "ஆடி") {
                 return;
             }
             // Add punnim image for Pournami days (priority to existing image, add as secondary if exists)
@@ -1426,20 +1427,20 @@ function assignSpecialImages() {
         });
     });
 
-    // Final pass: Add Pournami Purappadu event for all Pournami days (including Masi Magam)
+    // Final pass: Add Sri Varadharajaperumal Pournami Purappadu event for Chithirai and Aadi months only
     Object.keys(PANCHANGAM_2026).forEach(month => {
         const monthData = PANCHANGAM_2026[month];
         Object.keys(monthData).forEach(day => {
             const data = monthData[day];
-            // Skip April (month 3) and August (month 7) for Pournami events
-            if (parseInt(month) === 3 || parseInt(month) === 7) {
+            // Only add Pournami event for Chithirai and Aadi Tamil months
+            const tamilMonth = data.tamil_date.split(" ")[0];
+            if (tamilMonth !== "சித்திரை" && tamilMonth !== "ஆடி") {
                 return;
             }
-            // Add "பௌர்ணமி புறப்பாடு" event for all Pournami days
-            // This includes days where punnim is primary, secondary, or left image
+            // Add "ஸ்ரீ வரதராஜப் பெருமாள் பௌர்ணமி புறப்பாடு" event for Pournami days
             if (data.tithi === "பௌர்ணமி" || (data.events && data.events.some(e => e.includes("பௌர்ணமி")))) {
-                if (!data.events.includes("பௌர்ணமி புறப்பாடு")) {
-                    data.events.push("பௌர்ணமி புறப்பாடு");
+                if (!data.events.includes("ஸ்ரீ வரதராஜப் பெருமாள் பௌர்ணமி புறப்பாடு")) {
+                    data.events.push("ஸ்ரீ வரதராஜப் பெருமாள் பௌர்ணமி புறப்பாடு");
                     // Update festival string to reflect changes
                     data.festival = data.events.join(", ");
                 }
