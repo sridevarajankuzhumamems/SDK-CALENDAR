@@ -499,8 +499,8 @@ const AUGUST_2026_DATA = {
     24: { tamil_date: "ஆவணி 7", nakshatra: "பூராடம்", tithi: "த்வாதசி", events: ["ஏகாதசி"] },
     25: { tamil_date: "ஆவணி 8", nakshatra: "உத்திராடம்", tithi: "த்வாதசி", events: ["பிரதோஷம்"] },
     26: { tamil_date: "ஆவணி 9", nakshatra: "திருவோணம்", tithi: "த்ரயோதசி", events: ["மீலாத்-உன்-நபி", "ஒணம்"] },
-    27: { tamil_date: "ஆவணி 10", nakshatra: "அவிட்டம்", tithi: "பௌர்ணமி", events: ["கஜேந்திர மோட்சம்"] },
-    28: { tamil_date: "ஆவணி 11", nakshatra: "சதயம்", tithi: "பிரதமை", events: [] },
+    27: { tamil_date: "ஆவணி 10", nakshatra: "அவிட்டம்", tithi: "த்ரயோதசி", events: [] },
+    28: { tamil_date: "ஆவணி 11", nakshatra: "சதயம்", tithi: "பௌர்ணமி", events: ["கஜேந்திர மோட்சம்"] },
     29: { tamil_date: "ஆவணி 12", nakshatra: "பூரட்டாதி", tithi: "பிரதமை", events: [] },
     30: { tamil_date: "ஆவணி 13", nakshatra: "உத்திரட்டாதி", tithi: "த்விதியை", events: [] },
     31: { tamil_date: "ஆவணி 14", nakshatra: "ரேவதி", tithi: "த்ரிதியை", events: [] }
@@ -1274,7 +1274,7 @@ function assignSpecialImages() {
         const aadiImages = [aadi1, aadi2, aadi3, aadi4, aadi5, aadi6, aadi7, aadi8, aadi9, aadi10];
         for (let i = 0; i < 10; i++) {
             // Sequence starts 7 days before Pournami (Pournami is day 8, index 7)
-            const targetDate = new Date(2026, aadiPournami.month, aadiPournami.day - 7 + i);
+            const targetDate = new Date(2026, aadiPournami.month, aadiPournami.day - 8 + i);
             const m = targetDate.getMonth();
             const d = targetDate.getDate();
 
