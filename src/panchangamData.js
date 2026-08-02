@@ -134,6 +134,9 @@ const puratasi_3 = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALE
 const puratasi_4 = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/Purattachi_4.jpg'
 const nadanagopal = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/IMG_20260110_205907.jpg'
 
+
+const garudaPanjami = 'https://cdn.jsdelivr.net/gh/sridevarajankuzhumamems/SDK-CALENDAR-IMAGES/downloads/May_23_Garuda_Vaganam.jpg';
+
 // Day types for color highlighting
 export const DAY_TYPES = {
     MAJOR_FESTIVAL: "major_festival",  // Red highlight
@@ -1326,6 +1329,26 @@ function assignSpecialImages() {
                 }
                 if (data.events && !data.events.includes("ஆடி அமாவாசை")) {
                     data.events.push("ஆடி அமாவாசை");
+                }
+            }
+        });
+    });
+
+    // Garuda Panchami - Aadi month with Panchami tithi
+    Object.keys(PANCHANGAM_2026).forEach(month => {
+        const monthData = PANCHANGAM_2026[month];
+        Object.keys(monthData).forEach(day => {
+            const data = monthData[day];
+            if (data.tamil_date.startsWith("ஆடி") && data.tithi === "பஞ்சமி") {
+                if (data.image) {
+                    data.leftImage = garudaPanjami;
+                    data.secondaryImage = garudaPanjami;
+                } else {
+                    data.image = garudaPanjami;
+                }
+                if (data.events && !data.events.includes("கருட பஞ்சமி")) {
+                    data.events.push("கருட பஞ்சமி");
+                    data.festival = data.events.join(", ");
                 }
             }
         });
