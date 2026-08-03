@@ -1334,12 +1334,12 @@ function assignSpecialImages() {
         });
     });
 
-    // Garuda Panchami - Aadi month with Panchami tithi
+    // Garuda Panchami - Aadi month second Panchami tithi
     Object.keys(PANCHANGAM_2026).forEach(month => {
         const monthData = PANCHANGAM_2026[month];
         Object.keys(monthData).forEach(day => {
             const data = monthData[day];
-            if (data.tamil_date.startsWith("ஆடி") && data.tithi === "பஞ்சமி") {
+            if (data.tamil_date === "ஆடி 32" && data.tithi === "பஞ்சமி") {
                 if (data.image) {
                     data.leftImage = garudaPanjami;
                     data.secondaryImage = garudaPanjami;
